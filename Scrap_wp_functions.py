@@ -73,14 +73,20 @@ def wait_till_komentarze_loaded(driver):
         
     t2 = time.clock()
     
-    print(t2 - t1)
+    #print(t2 - t1)
 
 
 def scrap_wiadomosci_wp(driver, url):
     
+    t1 = time.clock()
+    
     driver.get(url)  
     
+    #print(time.clock() - t1)
+    
     wait_till_komentarze_loaded(driver)
+    
+    #print(time.clock() - t1)
 
     
     html = driver.page_source
@@ -122,11 +128,11 @@ def scrap_wiadomosci_wp(driver, url):
     except:
         text_article = ''
     
-    
+    #print(time.clock() - t1)
     
     output_grades = scrap_oceny_wp(soup_tmp)
 
-            
+    #print(time.clock() - t1)
     
     output = {'title' : title_article, 
               'author': author_article,
@@ -140,9 +146,15 @@ def scrap_wiadomosci_wp(driver, url):
 
 def scrap_finanses_wp(driver, url):
     
+    t1 = time.clock()
+    
     driver.get(url)  
     
+    #print(time.clock() - t1)
+    
     wait_till_komentarze_loaded(driver)
+    
+    #print(time.clock() - t1)
     
     html = driver.page_source
     soup_tmp = BeautifulSoup(html) 
@@ -164,10 +176,14 @@ def scrap_finanses_wp(driver, url):
     
     tmp2 = ''.join(tmp2)
     
-    print(tmp1_author)
-    print(tmp1_title)
+    #print(tmp1_author)
+    #print(tmp1_title)
+    
+    #print(time.clock() - t1)
     
     output_grades = scrap_oceny_wp(soup_tmp)
+    
+    #print(time.clock() - t1)
     
     output = {'title' : tmp1_title, 
               'author': tmp1_author,
